@@ -1,0 +1,41 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+	<title> Delete TODO </title> 
+	<style> 
+		table, 
+		th, 
+		td { 
+			border: 1px solid black; 
+			border-collapse: collapse;
+		} 
+	</style> 
+</head> 
+<body> 
+<h1><center> Delete an Item! </center> </h1> 
+<table> 
+	<tr> 	
+		<th>Category</th> 
+		<th>Description</th> 
+		<th>Status</th> 
+		<th>Added On</th> 
+	</tr> 
+	<tr> 
+		{% for i in items %} 
+		<td> {{ i.categoryname }} </td> 
+		<td> {{ i.description }} <br> 
+		{% if i.imageURL %} 
+			<img src = "{{ url_for('getfile', filename = i.imageURL) }}" alt = "{{ i.imageURL }}" width = "200" height = "150"> 
+		{% endif %} 
+		</td> 
+		<td> {{ i.status }} </td> 
+		<td> {{ i.addon }} </td> 
+		{% endfor %} 
+	</tr> 
+</table> 
+<form method = "post" action="{{ url_for('delete', itemID = itemID) }}" enctype="multipart/form-data"> 
+		<input type = "submit"> 
+</body> 
+</html> 
+	
+	

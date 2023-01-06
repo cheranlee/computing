@@ -1,0 +1,40 @@
+<!DOCTYPE HTML> 
+<html> 
+
+<head> 
+	<title> TODO List </title>
+	<link rel = "stylesheet" href="{{ url_for('static', filename='todo.css') }}">
+</head>
+
+<body> 
+	<h1> TO DO LIST </h1>
+	{% if todolist %}
+	<table> 
+		<tr> 
+			<th> Category </th>
+			<th> Description </th>
+			<th> Status </th>
+			<th> Added On </th>
+			<th> Modify </th>
+		</tr>
+		{% for item in todolist %}
+		<tr> 
+			<td> {{ item.categoryname }} </td>
+			<td> <center> {{ item.description }} </center> <br> 
+			{% if item.imageURL %} 
+				<img src = "{{ url_for('getfile', filename = item.imageURL) }}" alt = "{{ item.imageURL }}" width = "200" height="150"> 
+			{% endif %} 
+			</td>
+			<td> {{ item.status }} </td>
+			<td> {{ item.addon }} </td>
+			<td> <a href="{{ url_for('edit', itemID=item.id) }}"> Edit </a>    <a href="{{ url_for('delete', itemID = item.id) }}"> Delete </a> 
+			</td>
+
+		</tr>
+		{% endfor %}
+	</table>
+	{% endif %}
+
+	<p id='add'><a href="{{ url_for('add') }}"> Add item </a></p>
+</body>
+</html>
